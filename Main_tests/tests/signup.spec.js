@@ -12,5 +12,9 @@ test('signup_Page', async({page})=> {
 
      await Signup.form('Test@123', '16','January','2017');
      await page.waitForTimeout(2000);
+
+     await Signup.address('Automation_First','Automation_Lastname','Nop','Us_Sector_1','Galit 64','Israel','UK SP', 'Newyork','22324','3232323232');
+    //  FirstName,lastName,Company,Address1,Address2,SelectOption,State,City,Zipcode,Mobilenumber
 }
+
 )     
