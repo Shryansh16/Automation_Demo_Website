@@ -1,6 +1,3 @@
-import {test, expect } from "@playwright/test";
-
-
 export class loginpage{
 
     constructor(page){
@@ -10,6 +7,9 @@ export class loginpage{
         this.password = page.locator('[data-qa="login-password"]');
         this.loginbutton=page.getByRole('button', { name: 'Login',exact:true});
         
+        // logout 
+        this.logoutLink = page.locator('a[href="/logout"]');
+        
 
     }
      
@@ -17,5 +17,9 @@ export class loginpage{
         await this.emailInput.fill(Email);
         await this.password.fill(password);
         await this.loginbutton.click();
+    }
+
+    async logout(){
+    await this.logoutLink.click();
     }
 }
