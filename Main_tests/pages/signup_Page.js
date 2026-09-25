@@ -41,6 +41,8 @@ export class signup_Page{
         this.AccountdeleteText=page.locator('[data-qa="account-deleted"]');
         // delete account sucessfully 
         this.deletescussfully =page.locator('[data-qa="continue-button"]');
+
+
     
         
     }
@@ -88,6 +90,9 @@ export class signup_Page{
 
     //delete continue button
     await this.deletescussfully.click();
+
+
+
 
     
     
