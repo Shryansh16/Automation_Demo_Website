@@ -6,7 +6,8 @@ import { signup_Page } from '../pages/signup_Page';
 test('signup_Page', async({page})=> {
     const Signup=  new signup_Page(page);   
 
-    await page.goto('https://automationexercise.com/login');
+    // await page.goto('https://automationexercise.com/login');
+        await page.goto('/login');
 
     await Signup.signup('Automation_User', 'Automationqa@gmail.com');
     await page.waitForTimeout(2000);
@@ -22,7 +23,8 @@ test('signup_Page', async({page})=> {
 // test case 5 - user already exists
 test('signup with already existing user',async({page})=>{
      const Signup=  new signup_Page(page);
-     await page.goto('https://automationexercise.com/login');
+    //  await page.goto('https://automationexercise.com/login');
+        await page.goto('/login');
 
     await Signup.signup('Automation_User', 'Testqa@gmail.com');
 

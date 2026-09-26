@@ -9,7 +9,8 @@ import { loginpage } from '../pages/loginpage'
 test('login_page_Successfully',async({page}) =>{
 const Loginpage = new loginpage(page);
 
-await page.goto('https://automationexercise.com/login');
+// await page.goto('https://automationexercise.com/login');
+    await page.goto('/login');
 
 await Loginpage.login('Testqa@gmail.com', 'Test@123');
 // await page.waitForTimeout(2000);
@@ -24,7 +25,8 @@ console.log('Test case 2  - login successfully');
 test('Login_Fails', async({page})=>{
    const Loginpage = new loginpage(page);
 
-await page.goto('https://automationexercise.com/login');
+// await page.goto('https://automationexercise.com/login');
+    await page.goto('/login');
 
 await Loginpage.login('Testqa@gmail.com', 'Test@1234');
 await expect(page.getByText('Your email or password is incorrect!')).toBeVisible();
@@ -36,7 +38,8 @@ console.log('Test case 3  - login fails');
 test('login and logout', async({page})=>{
     const Loginpage = new loginpage(page);
 
-await page.goto('https://automationexercise.com/login');
+// await page.goto('https://automationexercise.com/login');
+    await page.goto('/login');
 
 await Loginpage.login('Testqa@gmail.com', 'Test@123');
 
