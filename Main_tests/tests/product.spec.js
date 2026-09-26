@@ -13,3 +13,17 @@ test('verify product page', async({page})=>{
 
     console.log('Test case = 7 verify product page and product page detials')
 })
+
+//test case - 8 verify search product 
+test('verify search product ' , async({page}) =>{
+     const Product_page = new product(page);
+    
+     await page.goto('/')
+      await Product_page.productflow();  
+
+     await Product_page.searchprodcut('Winter Top');
+     await page.waitForTimeout(5000);
+
+     console.log('Test_case = 8 verify search product ');
+
+})

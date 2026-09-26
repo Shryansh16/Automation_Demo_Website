@@ -4,7 +4,7 @@ export class product{
     constructor(page){
         this.page = page;
         this.prodoctButton= page.locator('a[href="/products"]');
-        this.verifyallProduct =page.locator('.col-sm-9.padding-right > .features_items > .title.text-center');
+        this.verifyallProduct =page.locator('.row > .col-sm-9.padding-right > .features_items > .title.text-center');
         // this.verifycategory = page.locator('.col-sm-3 > .left-sidebar ')
         this.verifyBrand = page.locator('.brands_products')
         this.verifyproductlist =page.locator('.product-image-wrapper > .single-products');
@@ -15,6 +15,14 @@ export class product{
 
         //verify product details
         this.productdetails = page.locator('.product-information');
+
+
+        //search product 
+        this.searchbar = page.locator('#search_product');
+        //search button
+        this.searchbutton = page.locator('.btn.btn-default.btn-lg');
+        //product contain text 
+        this.searchContainText = page.locator('.productinfo.text-center')
      
 
 
@@ -22,7 +30,7 @@ export class product{
     }
     async productflow(){
     await this.prodoctButton.click();
-    await expect(this.verifyallProduct).toHaveText('All Products');
+    await expect(this.verifyallProduct).toContainText('All Products');
     // await expect(this.verifycategory).toHaveText('Category');
     await expect(this.verifyBrand).toBeVisible();
     await expect(this.verifyproductlist.first()).toBeVisible();
@@ -47,5 +55,11 @@ export class product{
 
 
 
+    }
+
+    async searchprodcut(prodcutname){
+        await this.searchbar.fill(prodcutname);
+        await this.searchbutton.click();
+        await expect(this.searchContainText).toContainText(prodcutname);
     }
 }
