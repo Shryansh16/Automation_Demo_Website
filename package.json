@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {"test": "playwright test Main_tests/tests",
+  "scripts": {
+    "test": "playwright test Main_tests/tests",
     "test:headed": "playwright test Main_tests/tests --headed",
-    "test:parallel": "playwright test Main_tests/tests --workers=2"},
+    "test:parallel": "playwright test Main_tests/tests --workers=2"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

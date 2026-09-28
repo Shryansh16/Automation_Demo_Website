@@ -1,41 +1,38 @@
-import {test, expect} from '@playwright/test';
-import { product } from '../pages/product_Page';
-
+import { test, expect } from "@playwright/test";
+import { product } from "../pages/product_Page";
 
 // test case - 7 product pade and product detial
-test('verify product page', async({page})=>{
-    const Product_page = new product(page);
-    // await page.goto('https://automationexercise.com/');
-        await page.goto('/');
-     await Product_page.productflow();   
-     await Product_page.firstProduct();
-    //  await page.waitForTimeout(5000);
+test("verify product page", async ({ page }) => {
+  const Product_page = new product(page);
+  // await page.goto('https://automationexercise.com/');
+  await page.goto("/");
+  await Product_page.productflow();
+  await Product_page.firstProduct();
+  //  await page.waitForTimeout(5000);
 
-    console.log('Test case = 7 verify product page and product page detials')
-})
+  console.log("Test case = 7 verify product page and product page detials");
+});
 
-//test case - 8 verify search product 
-test('verify search product ' , async({page}) =>{
-     const Product_page = new product(page);
-    
-     await page.goto('/')
-      await Product_page.productflow();  
+//test case - 8 verify search product
+test("verify search product ", async ({ page }) => {
+  const Product_page = new product(page);
 
-     await Product_page.searchprodcut('Winter Top');
-     await page.waitForTimeout(5000);
+  await page.goto("/");
+  await Product_page.productflow();
 
-     console.log('Test_case = 8 verify search product ');
+  await Product_page.searchprodcut("Winter Top");
+  await page.waitForTimeout(5000);
 
-})
+  console.log("Test_case = 8 verify search product ");
+});
 
 // test case 11 add product to add cart by product page
 
-test('add product to cart from product page', async({page})=>{
-    const Product_page = new product(page);
-    await page.goto('/')
-    await Product_page.AddProduct_Cart();
-    // await page.waitForTimeout(5000);
-    await Product_page.VerifyInsideCard();
-    console.log('add products to cart from product page ');
-
-})
+test("add product to cart from product page", async ({ page }) => {
+  const Product_page = new product(page);
+  await page.goto("/");
+  await Product_page.AddProduct_Cart();
+  // await page.waitForTimeout(5000);
+  await Product_page.VerifyInsideCard();
+  console.log("add products to cart from product page ");
+});
