@@ -27,3 +27,15 @@ test('verify search product ' , async({page}) =>{
      console.log('Test_case = 8 verify search product ');
 
 })
+
+// test case 11 add product to add cart by product page
+
+test('add product to cart from product page', async({page})=>{
+    const Product_page = new product(page);
+    await page.goto('/')
+    await Product_page.AddProduct_Cart();
+    // await page.waitForTimeout(5000);
+    await Product_page.VerifyInsideCard();
+    console.log('add products to cart from product page ');
+
+})
