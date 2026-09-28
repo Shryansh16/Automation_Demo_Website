@@ -9,7 +9,10 @@ test("signup_Page", async ({ page }) => {
   // await page.goto('https://automationexercise.com/login');
   await page.goto("/login");
 
-  await Signup.signup("Automation_User", "Automationqa@gmail.com");
+  await Signup.signup(
+    "Automation_User",
+    `Automationqa+${Math.random()}@gmail.com`,
+  );
   await page.waitForTimeout(2000);
 
   await Signup.form("Test@123", "16", "January", "2017");
@@ -27,6 +30,8 @@ test("signup_Page", async ({ page }) => {
     "22324",
     "3232323232",
   );
+  await page.waitForTimeout(2000);
+  await Signup.DeleteAccount();
   //  FirstName,lastName,Company,Address1,Address2,SelectOption,State,City,Zipcode,Mobilenumber
   console.log("Test case 1  - Signup sucessfully and then delete account");
 });

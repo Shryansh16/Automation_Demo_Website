@@ -75,6 +75,9 @@ export class signup_Page {
     await this.createAccount.click();
     await expect(this.AcountCreatedText).toHaveText("Account Created!");
     await this.continue.click();
+  }
+
+  async DeleteAccount() {
     await this.deleteAccount.click();
     await expect(this.AccountdeleteText).toHaveText("Account Deleted!");
     await this.deletescussfully.click();
