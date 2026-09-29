@@ -39,6 +39,8 @@ export class productQantity {
     this.continue_Shopping_Button2 = page.locator(
       '[data-qa="continue-button"]',
     );
+    this.DelteProduct = page.locator(".cart_quantity_delete");
+    this.emptyText = page.locator("#empty_cart p");
   }
 
   async addProductViewProdcuct(quantity) {
@@ -54,6 +56,8 @@ export class productQantity {
     await this.continue_Shopping_Button.click();
     await this.viewCartButton.click();
     await expect(this.verifyQuantity).toContainText(quantity);
+  }
+  async Checkout() {
     await this.checkout.click();
   }
   async loginRegisterButton() {
@@ -70,6 +74,7 @@ export class productQantity {
     await this.addComment.fill(addComment);
     await this.PlaceOrder.click();
   }
+
   async CardDetails(name, Number, CVC, Month, year) {
     await this.NameOnCard.fill(name);
     await this.CardNumber.fill(Number);
@@ -80,5 +85,10 @@ export class productQantity {
     await expect(this.OrderPlacedText).toHaveText("Order Placed!");
     await this.DownloadInvoice.click();
     await this.continue_Shopping_Button2.click();
+  }
+
+  async RemoveProduct() {
+    await this.DelteProduct.click();
+    await expect(this.emptyText).toContainText("Cart is empty!");
   }
 }

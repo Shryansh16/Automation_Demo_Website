@@ -35,7 +35,7 @@ test("Login_Fails", async ({ page }) => {
 });
 
 //Test case 4 - login after that logout successfully
-test("login and logout", async ({ page }) => {
+test("login and logout", { tag: "@login" }, async ({ page }) => {
   const Loginpage = new loginpage(page);
 
   // await page.goto('https://automationexercise.com/login');

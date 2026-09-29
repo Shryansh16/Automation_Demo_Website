@@ -29,12 +29,17 @@ export class signup_Page {
     this.createAccount = page.locator('[data-qa="create-account"]');
     this.AcountCreatedText = page.locator('[data-qa="account-created"]');
     this.continue = page.locator('[data-qa="continue-button"]');
+    this.confirmedName = page.locator(
+      ".shop-menu.pull-right > ul > li:nth-child(10)",
+    );
+    this.userName = null;
     this.deleteAccount = page.locator('a[href="/delete_account"]');
     this.AccountdeleteText = page.locator('[data-qa="account-deleted"]');
     this.deletescussfully = page.locator('[data-qa="continue-button"]');
   }
 
   async signup(name, email) {
+    this.userName = name;
     await this.name.fill(name);
     await this.email.fill(email);
     await this.signupbutton.click();
@@ -49,7 +54,6 @@ export class signup_Page {
     await this.newletter_checkbox.click();
     await this.offer_checkbox.click();
   }
-
   async address(
     FirstName,
     lastName,
@@ -75,6 +79,8 @@ export class signup_Page {
     await this.createAccount.click();
     await expect(this.AcountCreatedText).toHaveText("Account Created!");
     await this.continue.click();
+    await expect(this.confirmedName).toContainText(this.userName);
+    // console.log(this.userName);
   }
 
   async DeleteAccount() {

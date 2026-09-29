@@ -3,7 +3,7 @@ import { signup_Page } from "../pages/signup_Page";
 
 // test case 1 - register user and delete it successfully
 
-test("signup_Page", async ({ page }) => {
+test("signup_Page", { tag: "@signup" }, async ({ page }) => {
   const Signup = new signup_Page(page);
 
   // await page.goto('https://automationexercise.com/login');
