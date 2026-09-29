@@ -55,6 +55,8 @@ export class productQantity {
     await this.viewCartButton.click();
     await expect(this.verifyQuantity).toContainText(quantity);
     await this.checkout.click();
+  }
+  async loginRegisterButton() {
     await this.loginRegister.click();
   }
   async AfterCreateAccount(addComment) {
