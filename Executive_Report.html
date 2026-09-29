@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Playwright Executive Report</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background: #f5f7fa;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 30px;
+}
+
+.header {
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 30px;
+
+  margin-bottom: 25px;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
+}
+
+.header h1 {
+  margin: 0 0 10px 0;
+}
+
+.header p {
+  margin: 5px 0;
+
+  color: #6b7280;
+}
+
+.overall-status {
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding: 8px 18px;
+
+  border-radius: 20px;
+
+  font-weight: bold;
+}
+
+.overall-status.passed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.overall-status.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.overall-status.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.card {
+  background: white;
+
+  padding: 22px;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
+
+  text-align: center;
+}
+
+.card h3 {
+  margin: 0;
+
+  font-size: 14px;
+
+  color: #6b7280;
+}
+
+.card .number {
+  font-size: 30px;
+
+  font-weight: bold;
+
+  margin-top: 10px;
+}
+
+.card.passed .number {
+  color: #16a34a;
+}
+
+.card.failed .number {
+  color: #dc2626;
+}
+
+.card.skipped .number {
+  color: #d97706;
+}
+
+.card.pass-rate .number {
+  color: #2563eb;
+}
+
+.card.duration .number {
+  color: #7c3aed;
+}
+
+.section {
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 25px;
+
+  margin-bottom: 25px;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
+}
+
+.section h2 {
+  margin-top: 0;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+
+  border-bottom:
+    1px solid #e5e7eb;
+
+  text-align: left;
+
+  vertical-align: top;
+}
+
+th {
+  background: #f9fafb;
+}
+
+tr:hover {
+  background: #f9fafb;
+}
+
+.status {
+  display: inline-block;
+
+  padding: 5px 10px;
+
+  border-radius: 15px;
+
+  font-size: 12px;
+
+  font-weight: bold;
+}
+
+.status.passed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status.skipped {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+a {
+  color: #2563eb;
+
+  text-decoration: none;
+
+  font-size: 13px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+small {
+  color: #6b7280;
+}
+
+pre {
+  max-width: 500px;
+
+  overflow-x: auto;
+
+  background: #111827;
+
+  color: #f9fafb;
+
+  padding: 12px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+}
+
+details summary {
+  cursor: pointer;
+
+  color: #dc2626;
+
+  font-weight: bold;
+}
+
+.footer {
+  text-align: center;
+
+  color: #6b7280;
+
+  font-size: 12px;
+
+  margin-top: 30px;
+}
+
+@media(max-width: 900px) {
+
+  .summary {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+@media(max-width: 600px) {
+
+  .summary {
+    grid-template-columns:
+      1fr;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- ============================================ -->
+  <!-- HEADER -->
+  <!-- ============================================ -->
+
+  <div class="header">
+
+    <h1>
+      Playwright Automation Executive Report
+    </h1>
+
+    <p>
+      <strong>Project:</strong>
+      Automation Exercise
+    </p>
+
+    <p>
+      <strong>Test Suite:</strong>
+      Regression Flow Checkout
+    </p>
+
+    <p>
+      <strong>Execution Date:</strong>
+      29/9/2026, 4:32:59 pm
+    </p>
+
+    <p>
+      <strong>Automation Tool:</strong>
+      Playwright
+    </p>
+
+    <span class="overall-status failed">
+      Overall Status: FAILED
+    </span>
+
+  </div>
+
+
+  <!-- ============================================ -->
+  <!-- SUMMARY CARDS -->
+  <!-- ============================================ -->
+
+  <div class="summary">
+
+    <div class="card">
+      <h3>Total Tests</h3>
+
+      <div class="number">
+        16
+      </div>
+    </div>
+
+
+    <div class="card passed">
+      <h3>Passed</h3>
+
+      <div class="number">
+        11
+      </div>
+    </div>
+
+
+    <div class="card failed">
+      <h3>Failed</h3>
+
+      <div class="number">
+        2
+      </div>
+    </div>
+
+
+    <div class="card skipped">
+      <h3>Skipped</h3>
+
+      <div class="number">
+        3
+      </div>
+    </div>
+
+
+    <div class="card pass-rate">
+      <h3>Pass Rate</h3>
+
+      <div class="number">
+        68.8%
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ============================================ -->
+  <!-- EXECUTION INFORMATION -->
+  <!-- ============================================ -->
+
+  <div class="section">
+
+    <h2>
+      Execution Information
+    </h2>
+
+    <p>
+      <strong>Total Execution Duration:</strong>
+      3m 26s
+    </p>
+
+    <p>
+      <strong>Total Test Cases:</strong>
+      16
+    </p>
+
+    <p>
+      <strong>Passed:</strong>
+      11
+    </p>
+
+    <p>
+      <strong>Failed:</strong>
+      2
+    </p>
+
+    <p>
+      <strong>Skipped:</strong>
+      3
+    </p>
+
+  </div>
+
+
+  <!-- ============================================ -->
+  <!-- TEST DETAILS -->
+  <!-- ============================================ -->
+
+  <div class="section">
+
+    <h2>
+      Test Execution Details
+    </h2>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            #
+          </th>
+
+          <th>
+            Test Case
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Duration
+          </th>
+
+          <th>
+            Evidence
+          </th>
+
+          <th>
+            Error
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        
+      <tr>
+        <td>1</td>
+
+        <td>
+          <strong>Contect us form</strong>
+          <br>
+          <small>contectUs.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          18s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>2</td>
+
+        <td>
+          <strong>login_page_Successfully</strong>
+          <br>
+          <small>loginpage.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          11s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>3</td>
+
+        <td>
+          <strong>Login_Fails</strong>
+          <br>
+          <small>loginpage.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          9s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>4</td>
+
+        <td>
+          <strong>login and logout</strong>
+          <br>
+          <small>loginpage.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          8s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>5</td>
+
+        <td>
+          <strong>verify product page</strong>
+          <br>
+          <small>product.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          8s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>6</td>
+
+        <td>
+          <strong>verify search product </strong>
+          <br>
+          <small>product.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status failed">
+            FAILED
+          </span>
+        </td>
+
+        <td>
+          31s
+        </td>
+
+        <td>
+          <a href="test-results/product-verify-search-product--chromium/test-failed-1.png" target="_blank">📸 Screenshot</a><br><a href="test-results/product-verify-search-product--chromium/video.webm" target="_blank">🎥 Video</a><br><a href="test-results/product-verify-search-product--chromium/error-context.md" target="_blank">Attachment</a><br><a href="test-results/product-verify-search-product--chromium/trace.zip" target="_blank">🔍 Trace</a>
+        </td>
+
+        <td>
+          
+        <details>
+          <summary>View Error</summary>
+          <pre>[31mTest timeout of 30000ms exceeded.[39m</pre>
+        </details>
+      
+        </td>
+      </tr>
+    
+      <tr>
+        <td>7</td>
+
+        <td>
+          <strong>add product to cart from product page</strong>
+          <br>
+          <small>product.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          23s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>8</td>
+
+        <td>
+          <strong>add product Quantity in cart</strong>
+          <br>
+          <small>productQuantity.spec.js › Regression flow checkout</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          14s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>9</td>
+
+        <td>
+          <strong>END TO END bUY PRODUCT FLOW</strong>
+          <br>
+          <small>productQuantity.spec.js › Regression flow checkout</small>
+        </td>
+
+        <td>
+          <span class="status failed">
+            FAILED
+          </span>
+        </td>
+
+        <td>
+          32s
+        </td>
+
+        <td>
+          <a href="test-results/productQuantity-Regression-87803-END-TO-END-bUY-PRODUCT-FLOW-chromium/test-failed-1.png" target="_blank">📸 Screenshot</a><br><a href="test-results/productQuantity-Regression-87803-END-TO-END-bUY-PRODUCT-FLOW-chromium/video.webm" target="_blank">🎥 Video</a><br><a href="test-results/productQuantity-Regression-87803-END-TO-END-bUY-PRODUCT-FLOW-chromium/error-context.md" target="_blank">Attachment</a><br><a href="test-results/productQuantity-Regression-87803-END-TO-END-bUY-PRODUCT-FLOW-chromium/trace.zip" target="_blank">🔍 Trace</a>
+        </td>
+
+        <td>
+          
+        <details>
+          <summary>View Error</summary>
+          <pre>[31mTest timeout of 30000ms exceeded.[39m</pre>
+        </details>
+      
+        </td>
+      </tr>
+    
+      <tr>
+        <td>10</td>
+
+        <td>
+          <strong>register then add and check out product</strong>
+          <br>
+          <small>productQuantity.spec.js › Regression flow checkout</small>
+        </td>
+
+        <td>
+          <span class="status skipped">
+            SKIPPED
+          </span>
+        </td>
+
+        <td>
+          0s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>11</td>
+
+        <td>
+          <strong>test case - 15 login then add product , buy product and logout </strong>
+          <br>
+          <small>productQuantity.spec.js › Regression flow checkout</small>
+        </td>
+
+        <td>
+          <span class="status skipped">
+            SKIPPED
+          </span>
+        </td>
+
+        <td>
+          0s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>12</td>
+
+        <td>
+          <strong>test case 16 remove product from cart</strong>
+          <br>
+          <small>productQuantity.spec.js › Regression flow checkout</small>
+        </td>
+
+        <td>
+          <span class="status skipped">
+            SKIPPED
+          </span>
+        </td>
+
+        <td>
+          0s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>13</td>
+
+        <td>
+          <strong>signup_Page</strong>
+          <br>
+          <small>signup.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          18s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>14</td>
+
+        <td>
+          <strong>signup with already existing user</strong>
+          <br>
+          <small>signup.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          8s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>15</td>
+
+        <td>
+          <strong>verify home page subscription</strong>
+          <br>
+          <small>VerifySubscription.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          11s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+      <tr>
+        <td>16</td>
+
+        <td>
+          <strong>Verify cart subscription</strong>
+          <br>
+          <small>VerifySubscription.spec.js</small>
+        </td>
+
+        <td>
+          <span class="status passed">
+            PASSED
+          </span>
+        </td>
+
+        <td>
+          10s
+        </td>
+
+        <td>
+          —
+        </td>
+
+        <td>
+          —
+        </td>
+      </tr>
+    
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- ============================================ -->
+  <!-- FAILED TEST SUMMARY -->
+  <!-- ============================================ -->
+
+  
+  <div class="section">
+
+    <h2>
+      Failed Test Summary
+    </h2>
+
+    <p>
+      2 test case(s) failed during this execution.
+    </p>
+
+    <p>
+      Review the attached screenshot, video and Playwright
+      trace for detailed investigation.
+    </p>
+
+  </div>
+  
+
+
+  <!-- ============================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================ -->
+
+  <div class="footer">
+
+    Generated automatically by Playwright
+    Automation Framework
+
+  </div>
+
+</div>
+
+</body>
+
+</html>
