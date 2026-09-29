@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { productQantity } from "../pages/productQuantitypage";
 import { signup_Page } from "../pages/signup_Page";
+import { loginpage } from "../pages/loginpage";
 
 // test case 12 add product from home page and verify on cart with quantity
 test("add product Quantity in cart", async ({ page }) => {
@@ -97,4 +98,33 @@ test("register then add and check out product", async ({ page }) => {
   await Signup.DeleteAccount();
   // await page.waitForTimeout(2000);
   console.log("test case - 14 register user then check out product");
+});
+
+// test case - 15 login then add product , buy product and logout
+test("test case - 15 login then add product , buy product and logout ", async ({
+  page,
+}) => {
+  const Product_Quantity = new productQantity(page);
+  const Loginpage = new loginpage(page);
+  await page.goto("/login");
+  await Loginpage.login("Testqa@gmail.com", "Test@123");
+  await expect(
+    page.locator(".shop-menu.pull-right > ul > li:nth-child(10)"),
+  ).toContainText(" Logged in as ");
+  await Product_Quantity.addProductViewProdcuct("2");
+  await Product_Quantity.AfterCreateAccount(
+    "Order Should Be Deliver With in 10 days and Handle it with care",
+  );
+  await Product_Quantity.CardDetails(
+    "QkIC Bank",
+    "3456678",
+    "1123",
+    "11",
+    "2024",
+  );
+  await Loginpage.logout();
+
+  console.log(
+    "test case - 15 login then add product , buy product and logout ",
+  );
 });
