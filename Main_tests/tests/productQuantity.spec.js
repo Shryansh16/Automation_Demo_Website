@@ -4,7 +4,7 @@ import { signup_Page } from "../pages/signup_Page";
 import { loginpage } from "../pages/loginpage";
 
 test.describe("Regression flow checkout", () => {
-  test.describe.configure({ mode: "serial" });
+  test.describe.configure({ mode: "parallel" });
 
   // test case 12 add product from home page and verify on cart with quantity
   test("add product Quantity in cart", async ({ page }) => {

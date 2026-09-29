@@ -21,7 +21,7 @@ test("verify search product ", async ({ page }) => {
   await Product_page.productflow();
 
   await Product_page.searchprodcut("Winter Top");
-  await page.waitForTimeout(5000);
+  // await page.waitForTimeout(5000);
 
   console.log("Test_case = 8 verify search product ");
 });

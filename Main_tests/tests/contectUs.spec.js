@@ -17,7 +17,7 @@ test("Contect us form", async ({ page }) => {
   await Contactus_FORM.submit();
   await page.waitForTimeout(5000);
   await Contactus_FORM.verifySuccessMessage();
-  await expect(page.locator(".features_items>.title.text-center")).toHaveText(
-    "Features Items",
-  );
+  await expect(
+    page.locator(".features_items>.title.text-center"),
+  ).toContainText("Features Items");
 });

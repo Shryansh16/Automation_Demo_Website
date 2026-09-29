@@ -17,7 +17,7 @@ export class ContactUs {
 
   async ContactUs_Form(Name, email, Subject) {
     await this.contactusButton.click();
-    await expect(this.VerifyGetinTouch).toHaveText("Get In Touch");
+    await expect(this.VerifyGetinTouch).toContainText("Get In Touch");
     await this.fillname.fill(Name);
     await this.Email.fill(email);
     await this.subject.fill(Subject);

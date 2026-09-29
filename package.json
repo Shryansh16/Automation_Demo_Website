@@ -6,7 +6,7 @@
   "scripts": {
     "test": "playwright test Main_tests/tests",
     "test:headed": "playwright test Main_tests/tests --headed",
-    "test:parallel": "playwright test Main_tests/tests --workers=3"
+    "test:parallel": "playwright test Main_tests/tests --workers=4"
   },
   "keywords": [],
   "author": "",
