@@ -83,7 +83,20 @@ export class productQantity {
     await this.ExpYear.fill(year);
     await this.payButtom.click();
     await expect(this.OrderPlacedText).toHaveText("Order Placed!");
+
+    const Path = require("path");
+    const downloadPromice = this.page.waitForEvent("download");
     await this.DownloadInvoice.click();
+    const download = await downloadPromice;
+    const filepath = Path.join(
+      process.cwd(),
+      "Main_tests",
+      "data",
+      "Download",
+      download.suggestedFilename(),
+    );
+    download.saveAs(filepath);
+    console.log("File saved at", filepath);
     await this.continue_Shopping_Button2.click();
   }
 

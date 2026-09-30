@@ -23,6 +23,7 @@ test.describe("Regression flow checkout", () => {
     "END TO END bUY PRODUCT FLOW",
     { tag: "@regression" },
     async ({ page }) => {
+      test.setTimeout(60_000);
       const Product_Quantity = new productQantity(page);
       const Signup = new signup_Page(page);
       await page.goto("/");
@@ -60,8 +61,9 @@ test.describe("Regression flow checkout", () => {
         "12",
         "2026",
       );
+      await page.waitForTimeout(1000);
       await Signup.DeleteAccount();
-      await page.waitForTimeout(2000);
+
       console.log(
         "test case - 13 HomepAGE ->VIEW PRODUCT -> ADD TO CART -> CONTINUE -> SIGHUP USER -> GO TO HOME PAGE -> CART CONTINUE -> CHECK DETAILS -> PAY -> CARD DETAILS -> SUBMIT-> CHECK SUCESS -> HOME PAGE -> DELETE USER.",
       );
