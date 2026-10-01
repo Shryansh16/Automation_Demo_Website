@@ -26,6 +26,7 @@ test.describe("Regression flow checkout", () => {
       test.setTimeout(60_000);
       const Product_Quantity = new productQantity(page);
       const Signup = new signup_Page(page);
+      const user = genrateuser();
       await page.goto("/");
 
       await Product_Quantity.addProductViewProdcuct("4");
@@ -36,20 +37,20 @@ test.describe("Regression flow checkout", () => {
         `Automationqa${Math.random()}@gmail.com`,
       );
 
-      await Signup.form("Test@123", "16", "January", "2017");
+      await Signup.form(user.password, "16", "January", "2017");
       await page.waitForTimeout(2000);
 
       await Signup.address(
-        "Automation_First",
-        "Automation_Lastname",
-        "Nop",
-        "Us_Sector_1",
-        "Galit 64",
+        user.firstName,
+        user.lastName,
+        user.company,
+        user.address1,
+        user.address2,
         "Israel",
         "UK SP",
         "Newyork",
         "22324",
-        "3232323232",
+        "3232323232"
       );
       await Product_Quantity.AfterCreateAccount(
         "Order Should Be Deliver With in 15 Days",
@@ -74,25 +75,23 @@ test.describe("Regression flow checkout", () => {
   test("register then add and check out product", async ({ page }) => {
     const Signup = new signup_Page(page);
     const Product_Quantity = new productQantity(page);
-
+    const user = genrateuser();
     await page.goto("/login");
-    await Signup.signup(
-      "Automation_User",
-      `Automationqa${Math.random()}@gmail.com`,
-    );
-    await Signup.form("Test@123", "16", "January", "2017");
+    await Signup.signup(user.fullName, user.email);
+    await Signup.form(user.password, "16", "January", "2017");
     await page.waitForTimeout(2000);
+
     await Signup.address(
-      "Automation_First",
-      "Automation_Lastname",
-      "Nop",
-      "Us_Sector_1",
-      "Galit 64",
+      user.firstName,
+      user.lastName,
+      user.company,
+      user.address1,
+      user.address2,
       "Israel",
       "UK SP",
       "Newyork",
       "22324",
-      "3232323232",
+      "3232323232"
     );
 
     await Product_Quantity.addProductViewProdcuct("2");

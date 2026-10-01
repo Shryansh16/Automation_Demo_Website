@@ -1,29 +1,29 @@
 import { test, expect } from "@playwright/test";
 import { signup_Page } from "../pages/signup_Page";
+import { genrateuser } from '../Utils/testData';
+
+
 
 // test case 1 - register user and delete it successfully
 
 test("signup_Page", { tag: "@signup" }, async ({ page }) => {
   const Signup = new signup_Page(page);
-
+  const user = genrateuser();
   // await page.goto('https://automationexercise.com/login');
   await page.goto("/login");
 
-  await Signup.signup(
-    "Automation_User",
-    `Automationqa+${Math.random()}@gmail.com`,
-  );
+  await Signup.signup(user.fullName, user.email);
   await page.waitForTimeout(2000);
 
-  await Signup.form("Test@123", "16", "January", "2017");
+  await Signup.form(user.password, "16", "January", "2017");
   await page.waitForTimeout(2000);
 
   await Signup.address(
-    "Automation_First",
-    "Automation_Lastname",
-    "Nop",
-    "Us_Sector_1",
-    "Galit 64",
+    user.firstName,
+    user.lastName,
+    user.company,
+    user.address1,
+    user.address2,
     "Israel",
     "UK SP",
     "Newyork",
