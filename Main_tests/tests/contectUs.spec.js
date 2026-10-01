@@ -1,22 +1,20 @@
-import { test, expect } from "@playwright/test";
-import { ContactUs } from "../pages/contectUs_Page";
+import { test, expect } from "../Utils/fixtures";
 
-test("Contect us form", async ({ page }) => {
-  const Contactus_FORM = new ContactUs(page);
+test("Contect us form", async ({ page, contactUsPage }) => {
   await page.goto("/");
-  await Contactus_FORM.ContactUs_Form(
+  await contactUsPage.ContactUs_Form(
     "Automation_User",
     "Automation@gmail.com",
     "Compalain for test failure",
   );
-  await Contactus_FORM.message(
+  await contactUsPage.message(
     "Test execution failed due to an issue encountered during the test run. The failure is being investigated, and I’ll share the findings once identified.",
   );
-  await Contactus_FORM.uploadFile();
+  await contactUsPage.uploadFile();
   await page.waitForTimeout(2000);
-  await Contactus_FORM.submit();
+  await contactUsPage.submit();
   await page.waitForTimeout(5000);
-  await Contactus_FORM.verifySuccessMessage();
+  await contactUsPage.verifySuccessMessage();
   await expect(
     page.locator(".features_items>.title.text-center"),
   ).toContainText("Features Items");

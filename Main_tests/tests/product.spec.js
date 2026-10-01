@@ -1,26 +1,26 @@
-import { test, expect } from "@playwright/test";
-import { product } from "../pages/product_Page";
+
+import { test, expect } from '../Utils/fixtures';
+
 
 // test case - 7 product pade and product detial
-test("verify product page", async ({ page }) => {
-  const Product_page = new product(page);
-  // await page.goto('https://automationexercise.com/');
+test("verify product page", async ({ page, productpage }) => {
+
   await page.goto("/");
-  await Product_page.productflow();
-  await Product_page.firstProduct();
+  await productpage.productflow();
+  await productpage.firstProduct();
   //  await page.waitForTimeout(5000);
 
   console.log("Test case = 7 verify product page and product page detials");
 });
 
 //test case - 8 verify search product
-test("verify search product ", async ({ page }) => {
-  const Product_page = new product(page);
+test("verify search product ", async ({ page, productpage }) => {
+
 
   await page.goto("/");
-  await Product_page.productflow();
+  await productpage.productflow();
 
-  await Product_page.searchprodcut("Winter Top");
+  await productpage.searchprodcut("Winter Top");
   // await page.waitForTimeout(5000);
 
   console.log("Test_case = 8 verify search product ");
@@ -28,11 +28,11 @@ test("verify search product ", async ({ page }) => {
 
 // test case 11 add product to add cart by product page
 
-test("add product to cart from product page", async ({ page }) => {
-  const Product_page = new product(page);
+test("add product to cart from product page", async ({ page, productpage }) => {
+
   await page.goto("/");
-  await Product_page.AddProduct_Cart();
+  await productpage.AddProduct_Cart();
   // await page.waitForTimeout(5000);
-  await Product_page.VerifyInsideCard();
+  await productpage.VerifyInsideCard();
   console.log("add products to cart from product page ");
 });
