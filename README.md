@@ -3,6 +3,7 @@
 ![Playwright](https://img.shields.io/badge/Playwright-1.63.0-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Faker.js](https://img.shields.io/badge/Faker.js-Dynamic_Data-8B5CF6?style=for-the-badge&logo=data:image/svg+xml;base64,&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 
 An enterprise-ready UI test automation framework built with **Playwright** and **JavaScript**, designed using the **Page Object Model (POM)** pattern. It automates critical user journeys on the [Automation Exercise](https://automationexercise.com) e-commerce platform and features a custom **Executive Reporting Dashboard** alongside automated failure diagnostics (traces, videos, screenshots).
@@ -12,12 +13,14 @@ An enterprise-ready UI test automation framework built with **Playwright** and *
 ## 📌 Key Highlights
 
 - **Page Object Model (POM)**: Strict separation of locators and business actions from test assertions for maximum reusability and low maintenance overhead.
+- **Custom Playwright Fixtures (`test.extend`)**: All 6 page objects are registered as custom fixtures in `Utils/fixtures.js`. Tests receive pre-initialized page objects (e.g., `signupPage`, `loginPage`, `productQuantityPage`) directly via test parameters — eliminating manual instantiation boilerplate across every spec file.
+- **Dynamic Test Data Generation (`@faker-js/faker`)**: User profiles (name, email, password, company, address) are generated dynamically at runtime via `Utils/testData.js`, ensuring every test run uses unique, realistic data and preventing duplicate-account collisions.
 - **Custom Executive Dashboard (`Executive_Report.html`)**: A standalone, stakeholder-friendly HTML report built in Node.js that parses execution JSON to provide pass rates, test duration, collapsible error logs, and direct links to diagnostic evidence.
 - **Deep Failure Diagnostics**:
   - 🔍 **Playwright Traces**: `retain-on-failure` for DOM snapshots and network timeline inspection.
   - 🎥 **Video Recordings**: `retain-on-failure` for step-by-step playback of failed runs.
   - 📸 **Screenshots**: `only-on-failure` capturing exact application state at failure.
-- **Parallel & Tagged Execution**: Configured for multi-worker parallel execution and tagged test suites (`@regression`, `@login`, `@signup`).
+- **Parallel & Tagged Execution**: Configured for multi-worker parallel execution and tagged test suites (`@regression`, `@login`, `@signup`, `@testcase14`, `@testcase15`).
 - **CI/CD Integration**: Pre-configured GitHub Actions workflow (`playwright.yml`) executing tests and archiving reports.
 
 ---
@@ -51,7 +54,9 @@ Automation_Demo_Website/
 │   │   ├── signup.spec.js          # Dynamic registration & collision tests
 │   │   └── VerifySubscription.spec.js # Homepage and cart subscriptions
 │   │
-│   └── Utils/                      # Helpers and test fixtures
+│   └── Utils/                      # Helpers, fixtures, and test data
+│       ├── fixtures.js             # Custom Playwright fixtures (test.extend)
+│       └── testData.js             # Dynamic test data generator (@faker-js/faker)
 │
 ├── ExecutiveReport.js              # Custom Executive HTML report generator
 ├── Executive_Report.html           # Generated executive dashboard
@@ -72,6 +77,63 @@ Automation_Demo_Website/
 | **End-to-End Checkout** | `productQuantity.spec.js` | • Add product with custom quantity<br>• E2E: Register $\to$ Checkout $\to$ Payment $\to$ Invoice download<br>• Login $\to$ Add to cart $\to$ Place order $\to$ Logout<br>• Cart item removal & empty cart verification |
 | **Customer Support** | `contectUs.spec.js` | • Contact form submission with file attachment (`sample.pdf`)<br>• Browser dialog (alert) handling |
 | **Subscriptions** | `VerifySubscription.spec.js` | • Homepage footer subscription verification<br>• Cart page subscription verification |
+
+---
+
+## 🧩 Custom Fixtures (`test.extend`)
+
+All page objects are registered as **custom Playwright fixtures** in [`Utils/fixtures.js`](Main_tests/Utils/fixtures.js). This eliminates repetitive `new PageObject(page)` boilerplate inside every spec file.
+
+| Fixture Name | Page Object Class | Purpose |
+| :--- | :--- | :--- |
+| `signupPage` | `signup_Page` | User registration & account deletion |
+| `productQuantityPage` | `productQantity` | Cart, checkout & payment flows |
+| `loginPage` | `loginpage` | Login & logout actions |
+| `contactUsPage` | `ContactUs` | Contact form & file upload |
+| `productpage` | `product` | Product catalog & search |
+| `subscriptionPage` | `VerifySubscription` | Email newsletter subscriptions |
+
+**Before (without fixtures):**
+```javascript
+import { test, expect } from "@playwright/test";
+import { signup_Page } from "../pages/signup_Page";
+
+test("signup", async ({ page }) => {
+  const Signup = new signup_Page(page); // manual instantiation in every test
+  await Signup.signup(...);
+});
+```
+
+**After (with fixtures):**
+```javascript
+import { test, expect } from "../Utils/fixtures";
+
+test("signup", async ({ page, signupPage }) => {
+  await signupPage.signup(...); // injected automatically!
+});
+```
+
+---
+
+## 🎲 Dynamic Test Data (`@faker-js/faker`)
+
+User profiles are generated dynamically at runtime via [`Utils/testData.js`](Main_tests/Utils/testData.js) using `@faker-js/faker`. Each test run produces unique, realistic data:
+
+```javascript
+import { genrateuser } from "../Utils/testData";
+
+const user = genrateuser();
+// user.firstName  → "Sofia"
+// user.lastName   → "Mitchell"
+// user.fullName   → "Sofia Mitchell"
+// user.email      → "sofia.mitchell@gmail.com"
+// user.password   → "test.sofia.mitchell.xkqwrm@123"
+// user.company    → "Acme Corp"
+// user.address1   → "742 Evergreen Terrace"
+// user.address2   → "Suite 200"
+```
+
+This replaces hardcoded `Math.random()` emails and static address strings, preventing duplicate-account collisions across parallel or repeated test runs.
 
 ---
 
@@ -175,9 +237,9 @@ The project includes continuous integration via **GitHub Actions** ([`.github/wo
 
 ## 🗺️ Future Roadmap
 
+- [x] **Custom Fixtures (`test.extend`)**: ~~Eliminate manual page object instantiation inside spec files.~~ ✅ Implemented — all 6 page objects registered in `Utils/fixtures.js`.
+- [x] **Dynamic Test Data (`@faker-js/faker`)**: ~~Replace hardcoded user data with realistic dynamic generation.~~ ✅ Implemented — `Utils/testData.js` generates unique user profiles per run.
 - [ ] **API Testing Integration**: Leverage Playwright's `APIRequestContext` for hybrid testing (e.g., API user creation & session preparation before UI checkout).
-- [ ] **Auth Storage State (`storageState`)**: Cache login state to bypass repeated UI logins and accelerate execution.
-- [ ] **Custom Fixtures (`test.extend`)**: Eliminate manual page object instantiation inside spec files.
 - [ ] **Visual Regression**: Integrate `toHaveScreenshot()` for automated UI visual regression testing.
 - [ ] **Automated GitHub Pages Deployment**: Automatically host `Executive_Report.html` on GitHub Pages after each CI run.
 
