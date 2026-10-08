@@ -5,6 +5,9 @@ import { loginpage } from "../pages/loginpage";
 import { ContactUs } from "../pages/contectUs_Page";
 import { product } from "../pages/product_Page";
 import { VerifySubscription } from "../pages/verifySubscription_Page";
+import { ProductsAPI } from "../api/Pages/ProductsApi";
+import { brandAPI } from "../api/Pages/brandAPI";
+
 
 export const test = baseTest.extend({
 
@@ -41,5 +44,19 @@ export const test = baseTest.extend({
         const subscription = new VerifySubscription(page);
         await use(subscription);
     },
+
+    //7. GetAllProducts api fixture
+
+    ProductApi: async ({ request }, use) => {
+        const productApiInstance = new ProductsAPI(request);
+        await use(productApiInstance);
+
+    },
+
+    //8. Brand Api fixture
+    BrandApi: async ({ request }, use) => {
+        const brandApiInstance = new brandAPI(request);
+        await use(brandApiInstance);
+    }
 });
 export { expect };

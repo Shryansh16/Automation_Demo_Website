@@ -1,30 +1,10 @@
-// import { test, expect } from "@playwright/test";
-
-// test("Get All Product list api", async ({ request }) => {
-//   const Response = await request.get(
-//     "https://automationexercise.com/api/productsList",
-//     {
-//       headers: {
-//         "content-type": "application/json",
-//       },
+// 
+// import { ProductsAPI } from "../Pages/ProductsApi";
+import { test, expect, request } from "../../Utils/fixtures";
 
 
-//     }
-//   );
-
-//   expect(Response.status()).toBe(200);
-//   const body = await Response.json()
-//   // console.log(body)
-//   expect(body.products).not.toBeNull();
-
-// });
-
-
-import { test, expect, request } from "@playwright/test";
-import { json } from "node:stream/consumers";
-
-test("Get All Product list api", async ({ request }) => {
-  const response = await request.get('/api/productsList');
+test("Get All Product list api", async ({ request, ProductApi }) => {
+  const response = await ProductApi.getAllProducts();
 
   // validate http status 
   expect(response.status()).toBe(200);
@@ -33,9 +13,11 @@ test("Get All Product list api", async ({ request }) => {
   // const responsebody = await response.text();
   const body = await response.json();
 
+
   // const body = JSON.parse(responsebody);
 
   //validate response schema /key 
+  expect(body.products).not.toBeNull();
   expect(body.responseCode).toBe(200);
   expect(body.products).toBeDefined();
   expect(Array.isArray(body.products)).toBe(true);
@@ -66,8 +48,9 @@ test("Get All Product list api", async ({ request }) => {
 
 
 })
-test("POST - should return 405 Method Not Allowed", async ({ request }) => {
-  const response = await request.post("/api/productsList"); // Sending POST instead of GET
+
+test("POST - should return 405 Method Not Allowed", async ({ request, ProductApi }) => {
+  const response = await ProductApi.getAllProductsPost(); // Sending POST instead of GET
   const body = JSON.parse(await response.text());
 
   expect(body.responseCode).toBe(405);
