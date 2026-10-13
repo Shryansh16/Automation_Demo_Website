@@ -1,4 +1,3 @@
-import { request } from "@playwright/test";
 import { test, expect } from "../../Utils/fixtures";
 
 test('All Brand List', async ({ BrandApi }) => {

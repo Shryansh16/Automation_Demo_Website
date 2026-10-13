@@ -7,6 +7,7 @@ import { product } from "../pages/product_Page";
 import { VerifySubscription } from "../pages/verifySubscription_Page";
 import { ProductsAPI } from "../api/Pages/ProductsApi";
 import { brandAPI } from "../api/Pages/brandAPI";
+import { searchProductApi } from "../api/Pages/searchProductApi";
 
 
 export const test = baseTest.extend({
@@ -57,6 +58,11 @@ export const test = baseTest.extend({
     BrandApi: async ({ request }, use) => {
         const brandApiInstance = new brandAPI(request);
         await use(brandApiInstance);
+    },
+    // search  product Api fixture
+    SearchProductApi: async ({ request }, use) => {
+        const searchProductApiInstance = new searchProductApi(request);
+        await use(searchProductApiInstance);
     }
 });
 export { expect };
