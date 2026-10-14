@@ -33,12 +33,17 @@ test('search Product', async ({ SearchProductApi }) => {
 });
 
 test('search without product ', async ({ SearchProductApi }) => {
-    const categoryName = " ";
-    const response = await SearchProductApi.postsearchProduct(categoryName);
-    // const body = JSON.parse(await response.text());
-    const body = await JSON.parse(await response.text());
-    // expect(body.responseCode).toBe(400);
+
+    // if we pass empty value in category it will return all products because it gives undfine when give empty screen.
+    // const categoryName = "";
+    // const response = await SearchProductApi.postsearchProduct(categoryName);
+
+    // if we dont pass any value in category it will return 400 bad request
+    const response = await SearchProductApi.postsearchProduct();
+    const body = JSON.parse(await response.text());
+    expect(body.responseCode).toBe(400);
     expect(body.message).toBe("Bad request, search_product parameter is missing in POST request.");
+    console.log(await response.text())
 
 
 })
