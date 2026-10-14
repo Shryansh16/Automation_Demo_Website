@@ -46,4 +46,16 @@ test('search without product ', async ({ SearchProductApi }) => {
     console.log(await response.text())
 
 
+});
+
+
+test('when Product not in db', { tag: '@NOTexists' }, async ({ SearchProductApi }) => {
+    const categoryName = "abcd123";
+    const response = await SearchProductApi.postsearchProduct(categoryName);
+    await expect(response.status()).toBe(200);
+    const body = await response.json();
+    await expect(body.products).toEqual([]);
+    await expect(body.products).toHaveLength(0);
+    await expect(body.responseCode).toBe(200);
+
 })

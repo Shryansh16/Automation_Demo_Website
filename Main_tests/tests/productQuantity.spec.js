@@ -3,7 +3,7 @@ import { genrateuser } from "../Utils/testData";
 
 
 test.describe("Regression flow checkout", () => {
-  test.describe.configure({ mode: "parallel" });
+  test.describe.configure({ mode: 'parallel' });
 
   // test case 12 add product from home page and verify on cart with quantity
   test("add product Quantity in cart", async ({ page, productQuantityPage }, use) => {

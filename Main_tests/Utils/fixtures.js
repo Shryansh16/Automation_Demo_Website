@@ -1,4 +1,4 @@
-import { test as baseTest, expect } from "@playwright/test";
+import { test as baseTest, expect, request } from "@playwright/test";
 import { signup_Page } from "../pages/signup_Page";
 import { productQantity } from "../pages/productQuantitypage";
 import { loginpage } from "../pages/loginpage";
@@ -8,6 +8,7 @@ import { VerifySubscription } from "../pages/verifySubscription_Page";
 import { ProductsAPI } from "../api/Pages/ProductsApi";
 import { brandAPI } from "../api/Pages/brandAPI";
 import { searchProductApi } from "../api/Pages/searchProductApi";
+import { loginAPI } from "../api/Pages/loginAPI";
 
 
 export const test = baseTest.extend({
@@ -63,6 +64,12 @@ export const test = baseTest.extend({
     SearchProductApi: async ({ request }, use) => {
         const searchProductApiInstance = new searchProductApi(request);
         await use(searchProductApiInstance);
-    }
+    },
+
+    // fixture login page API
+    loginPageApi: async ({ request }, use) => {
+        const loginApiInstance = new loginAPI(request);
+        await use(loginApiInstance);
+    },
 });
 export { expect };

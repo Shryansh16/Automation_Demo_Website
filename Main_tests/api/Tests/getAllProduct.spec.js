@@ -49,7 +49,7 @@ test("Get All Product list api", async ({ request, ProductApi }) => {
 
 })
 
-test("POST - should return 405 Method Not Allowed", async ({ request, ProductApi }) => {
+test("POST - should return 405 Method Not Allowed", async ({ ProductApi }) => {
   const response = await ProductApi.getAllProductsPost(); // Sending POST instead of GET
   const body = JSON.parse(await response.text());
 
