@@ -9,6 +9,8 @@ import { ProductsAPI } from "../api/Pages/ProductsApi";
 import { brandAPI } from "../api/Pages/brandAPI";
 import { searchProductApi } from "../api/Pages/searchProductApi";
 import { loginAPI } from "../api/Pages/loginAPI";
+import { signUpApi } from "../api/Pages/signUpAPI";
+import { deleteApi } from "../api/Pages/deleteApi";
 
 
 export const test = baseTest.extend({
@@ -71,5 +73,16 @@ export const test = baseTest.extend({
         const loginApiInstance = new loginAPI(request);
         await use(loginApiInstance);
     },
+    // SignUp Page API
+    signUpPageApi: async ({ request }, use) => {
+        const signApiInstance = new signUpApi(request);
+        await use(signApiInstance);
+    },
+
+    // Delete API
+    deletePageApi: async ({ request }, use) => {
+        const deleteApiInstance = new deleteApi();
+        await use(deleteApiInstance);
+    }
 });
 export { expect };

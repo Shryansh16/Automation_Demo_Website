@@ -17,6 +17,11 @@ export function genrateuser() {
         company: faker.company.name(),
         address1: faker.location.streetAddress(),
         address2: faker.location.secondaryAddress(),
+        zipcode: faker.location.zipCode(4),
+        mobile_number: faker.string.numeric(10),
+        month: faker.date.month(),
+        day: faker.number.int({ min: 1, max: 28 }).toString(),
+        year: faker.number.int({ min: 1970, max: 2000 }).toString(),
 
 
 
