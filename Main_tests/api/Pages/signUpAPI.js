@@ -1,5 +1,5 @@
-import { genrateuser } from '../../Utils/testData';
-const user = genrateuser();
+// import { genrateuser } from '../../Utils/testData';
+// const user = genrateuser();
 export class signUpApi {
     constructor(request) {
         this.request = request;
@@ -10,37 +10,38 @@ export class signUpApi {
 
 
 
-    async createUser() {
+    async createUser(userdata) {
         // console.log(user)
         return await this.request.post(this.endpoint, {
             form: {
-                email: user.email,
-                password: user.password,
-                title: 'mr', name: user.fullName,
+                name: userdata.fullName,
+                email: userdata.email,
+                password: userdata.password,
+                title: 'mr', name: userdata.fullName,
                 //(for example: Mr, Mrs, Miss), 
-                birth_date: user.day,
-                birth_month: user.month,
-                birth_year: user.year,
-                firstname: user.firstName,
-                lastname: user.lastName,
-                company: user.company,
-                address1: user.address1,
-                address2: user.address2,
+                birth_date: userdata.day,
+                birth_month: userdata.month,
+                birth_year: userdata.year,
+                firstname: userdata.firstName,
+                lastname: userdata.lastName,
+                company: userdata.company,
+                address1: userdata.address1,
+                address2: userdata.address2,
                 country: "Israel",
-                zipcode: user.zipcode,
+                zipcode: userdata.zipcode,
                 state: "Newyork",
                 city: 'Tel Aviv',
-                mobile_number: user.mobile_number,
+                mobile_number: userdata.mobile_number,
             }
         });
     }
 
 
-    async deleteUser() {
+    async deleteUser({ EMAIL: email, PASSWORD: password }) {
+        console.log(email, password)
         return await this.request.delete(this.deleteEndpoint, {
             form: {
-                email: user.email,
-                password: user.password,
+                email, password
             }
         });
     }
