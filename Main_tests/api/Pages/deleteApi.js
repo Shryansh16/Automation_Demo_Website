@@ -4,11 +4,11 @@ export class deleteApi {
         this.endpoint = '/api/deleteAccount';
     }
 
-    async deleteUser(Email, Password) {
+    async deleteUser({ EMAIL: email, PASSWORD: password }) {
+        // console.log(email, password)
         return await this.request.delete(this.endpoint, {
             form: {
-                email: Email,
-                password: Password,
+                email, password
             }
         });
     }

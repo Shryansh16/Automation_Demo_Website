@@ -4,14 +4,14 @@ export class signUpApi {
     constructor(request) {
         this.request = request;
         this.endpoint = '/api/createAccount';
-        this.deleteEndpoint = '/api/deleteAccount';
+        // this.deleteEndpoint = '/api/deleteAccount';
     }
 
 
 
 
     async createUser(userdata) {
-        // console.log(user)
+        console.log(userdata);
         return await this.request.post(this.endpoint, {
             form: {
                 name: userdata.fullName,
@@ -37,12 +37,12 @@ export class signUpApi {
     }
 
 
-    async deleteUser({ EMAIL: email, PASSWORD: password }) {
-        console.log(email, password)
-        return await this.request.delete(this.deleteEndpoint, {
-            form: {
-                email, password
-            }
-        });
-    }
+    // async deleteUser({ EMAIL: email, PASSWORD: password }) {
+    //     // console.log(email, password)
+    //     return await this.request.delete(this.deleteEndpoint, {
+    //         form: {
+    //             email, password
+    //         }
+    //     });
+    // }
 }
