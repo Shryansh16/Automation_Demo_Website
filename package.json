@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test Main_tests/tests",
+    "test:api": "playwright test Main_tests/api/Tests",
+    "test:all": "playwright test Main_tests",
     "test:headed": "playwright test Main_tests/tests --headed",
     "test:parallel": "playwright test Main_tests/tests --workers=4"
   },
