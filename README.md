@@ -50,6 +50,7 @@ Automation_Demo_Website/
 │   │   │
 │   │   └── Tests/                      # API Test Specifications
 │   │       ├── brandAPIpage.spec.js    # Brands retrieval & method checks
+│   │       ├── end2End.spec.js         # User Lifecycle End-to-End Regression flow (@regressionE2EApi)
 │   │       ├── getAllProduct.spec.js   # Products list & schema assertions
 │   │       ├── getUserByEmail.spec.js  # User details retrieval specs
 │   │       ├── loginApiPage.spec.js    # Login verification (positive & negative)
@@ -113,6 +114,7 @@ Automation_Demo_Website/
 | **User Registration & Deletion** | `signUp.spec.js` | `POST` / `DELETE` | • Create dynamic user with dynamic Faker payload (201)<br>• Delete newly created user (200 Account deleted)<br>• Negative test: Duplicate email signup (400 Email already exists)<br>• Negative test: Missing parameters (400 Bad Request) |
 | **Update Account** | `updateUserPut.spec.js` | `PUT` | • Create user $\to$ Generate updated profile $\to$ Update account via `PUT`<br>• Validate response code 200 & "User updated!" message |
 | **User Details Retrieval** | `getUserByEmail.spec.js` | `GET` | • Fetch user profile details by email<br>• Validate status code 200 & user account schema |
+| **User Lifecycle E2E Chain** | `end2End.spec.js` | `POST` $\to$ `PUT` $\to$ `DELETE` | • Sequential End-to-End API regression (`@regressionE2EApi`)<br>• Dynamic User Signup $\to$ Verify Login $\to$ PUT Profile Update $\to$ Account Deletion |
 
 ---
 
@@ -224,8 +226,14 @@ npm run test:all
 
 ### 2. Run API Tests Only
 ```bash
+# Run all API tests:
 npm run test:api
-# Or run a specific API spec:
+
+# Run User Lifecycle End-to-End Regression flow:
+npm run test:e2e:api
+
+# Or run specific specs directly:
+npx playwright test Main_tests/api/Tests/end2End.spec.js
 npx playwright test Main_tests/api/Tests/updateUserPut.spec.js
 npx playwright test Main_tests/api/Tests/signUp.spec.js
 ```
@@ -241,6 +249,9 @@ npm run test:parallel
 
 ### 4. Run by Tag
 ```bash
+# Run End-to-End API regression suite
+npx playwright test --grep "@regressionE2EApi"
+
 # Run regression tagged tests
 npx playwright test --grep "@regression"
 

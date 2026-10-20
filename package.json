@@ -6,6 +6,7 @@
   "scripts": {
     "test": "playwright test Main_tests/tests",
     "test:api": "playwright test Main_tests/api/Tests",
+    "test:e2e:api": "playwright test Main_tests/api/Tests/end2End.spec.js",
     "test:all": "playwright test Main_tests",
     "test:headed": "playwright test Main_tests/tests --headed",
     "test:parallel": "playwright test Main_tests/tests --workers=4"
